@@ -43,12 +43,16 @@ export default {
 
       async createAlbum() {
         try {
+          // NOTE we need the id that the API assigns to our data, so we return that value from the service
           const album = await albumsService.createAlbum(editableAlbumData.value)
+
+          // NOTE clears form
           editableAlbumData.value = { title: '', coverImg: '', category: 'misc' }
 
           // NOTE hides modal
           Modal.getOrCreateInstance('#albumModal').hide()
 
+          // NOTE pushes us to page for newly created album
           router.push({ name: 'Album Details', params: { albumId: album.id } })
         } catch (error) {
           Pop.error(error)

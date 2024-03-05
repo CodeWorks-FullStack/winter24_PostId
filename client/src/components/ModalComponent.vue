@@ -1,13 +1,15 @@
 <template>
-  <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="albumModalLabel" aria-hidden="true">
+  <div class="modal fade" :id="modalId" tabindex="-1" :aria-labelledby="modalId + 'Label'" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="albumModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" :id="modalId + 'Label'">{{ modalTitle }}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <AlbumForm />
+          <!-- <AlbumForm /> -->
+          <slot></slot>
+
         </div>
       </div>
     </div>
@@ -16,13 +18,15 @@
 
 
 <script>
-import AlbumForm from './AlbumForm.vue';
 
 export default {
+  props: {
+    modalId: { type: String, required: true },
+    modalTitle: { type: String, required: true, default: 'Modal title' }
+  },
   setup() {
     return {}
   },
-  components: { AlbumForm }
 }
 </script>
 

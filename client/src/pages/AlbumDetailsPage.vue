@@ -3,16 +3,24 @@
     <section v-if="album" class="row my-3">
       <!-- ANCHOR album details -->
       <div class="col-4">
-
         <section class="row">
           <div class="col-6">
             <img :src="album.coverImg" :alt="album.title" class="img-fluid">
           </div>
           <div class="col-6">
-            <h1 class="fs-4" :class="{ 'text-danger': album.archived }">
-              {{ album.title }}
-            </h1>
-            <h2 class="fs-5">By {{ album.creator.name }}</h2>
+            <div>
+              <h1 class="fs-4" :class="{ 'text-danger': album.archived }">
+                {{ album.title }}
+              </h1>
+              <h2 class="fs-5">By {{ album.creator.name }}</h2>
+            </div>
+
+            <div class="mt-2">
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pictureModal">
+                <i class="mdi mdi-plus-box"></i>
+                Add Picture
+              </button>
+            </div>
           </div>
         </section>
       </div>

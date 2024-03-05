@@ -9,7 +9,13 @@
     Made with 💖 by CodeWorks
   </footer>
 
-  <ModalComponent />
+  <ModalComponent modalId="albumModal" modalTitle="Create Album">
+    <AlbumForm />
+  </ModalComponent>
+
+  <ModalComponent modalId="pictureModal" modalTitle="Create Picture">
+    <PictureForm />
+  </ModalComponent>
 </template>
 
 <script>

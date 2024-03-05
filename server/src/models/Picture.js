@@ -12,3 +12,9 @@ export const PictureSchema = new Schema(
   }
 )
 
+PictureSchema.virtual('creator', {
+  localField: 'creatorId',
+  foreignField: '_id',
+  justOne: true,
+  ref: 'Account'
+})

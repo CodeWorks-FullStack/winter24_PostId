@@ -13,7 +13,7 @@
     </div>
     <div class="form-floating mb-3">
       <select v-model="editableAlbumData.category" class="form-select" id="category"
-        aria-label="Floating label select example">
+        aria-label="Floating label select example" required>
         <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
       </select>
       <label for="category">Category</label>
@@ -41,6 +41,7 @@ export default {
       async createAlbum() {
         try {
           await albumsService.createAlbum(editableAlbumData.value)
+          editableAlbumData.value = {}
         } catch (error) {
           Pop.error(error)
         }

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <section v-if="album" class="row">
+    <section v-if="album" class="row my-3">
       <!-- ANCHOR album details -->
       <div class="col-4">
 
@@ -18,9 +18,9 @@
       </div>
 
       <!-- ANCHOR pictures -->
-      <div class="col-8">
-
-        {{ pictures }}
+      <div class="col-8 masonry">
+        <img v-for="picture in pictures" :key="picture.id" :src="picture.imgUrl"
+          :alt="`${picture.creator.name}'s picture'`">
       </div>
     </section>
     <section v-else class="row">
@@ -71,4 +71,14 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.masonry {
+  columns: 200px;
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 15px black;
+  }
+}
+</style>

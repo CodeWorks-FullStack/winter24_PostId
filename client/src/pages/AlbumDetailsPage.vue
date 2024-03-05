@@ -87,6 +87,7 @@ export default {
     width: 100%;
     border-radius: 10px;
     box-shadow: 1px 1px 15px black;
+    margin-bottom: 1em;
   }
 }
 </style>

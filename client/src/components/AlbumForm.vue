@@ -30,9 +30,12 @@
 import Pop from '../utils/Pop.js'
 import { ref } from 'vue'
 import { albumsService } from '../services/AlbumsService.js'
+import { Modal } from 'bootstrap'
+import { useRouter } from 'vue-router'
 export default {
   setup() {
     const editableAlbumData = ref({ title: '', coverImg: '', category: 'misc' })
+    const router = useRouter()
 
     return {
       editableAlbumData,
@@ -40,8 +43,13 @@ export default {
 
       async createAlbum() {
         try {
-          await albumsService.createAlbum(editableAlbumData.value)
+          const album = await albumsService.createAlbum(editableAlbumData.value)
           editableAlbumData.value = { title: '', coverImg: '', category: 'misc' }
+
+          // NOTE hides modal
+          Modal.getOrCreateInstance('#albumModal').hide()
+
+          router.push({ name: 'Album Details', params: { albumId: album.id } })
         } catch (error) {
           Pop.error(error)
         }

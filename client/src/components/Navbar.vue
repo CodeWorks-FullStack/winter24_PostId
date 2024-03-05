@@ -11,7 +11,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#albumModal">
           <i class="mdi mdi-plus-box-outline me-1"></i>Create Album
         </button>
       </ul>

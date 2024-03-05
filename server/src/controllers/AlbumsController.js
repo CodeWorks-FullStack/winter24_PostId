@@ -4,19 +4,19 @@ import BaseController from "../utils/BaseController.js";
 
 
 
-export class AlbumsController extends BaseController{
-  constructor(){
+export class AlbumsController extends BaseController {
+  constructor () {
     super('api/albums')
     this.router
-    .get('', this.getAllAlbums)
-    .get('/:albumId', this.getOneAlbum)
-    .use(Auth0Provider.getAuthorizedUserInfo) // this middleware attaches .userInfo to the request parameter
-    .post('', this.createAlbum)
-    .delete('/:albumId', this.archiveAlbum)
+      .get('', this.getAllAlbums)
+      .get('/:albumId', this.getOneAlbum)
+      .use(Auth0Provider.getAuthorizedUserInfo) // this middleware attaches .userInfo to the request parameter
+      .post('', this.createAlbum)
+      .delete('/:albumId', this.archiveAlbum)
   }
 
 
-  async createAlbum(request, response, next){
+  async createAlbum(request, response, next) {
     try {
       const albumData = request.body
       albumData.creatorId = request.userInfo.id
@@ -26,7 +26,7 @@ export class AlbumsController extends BaseController{
       next(error)
     }
   }
-  async getAllAlbums(request, response, next){
+  async getAllAlbums(request, response, next) {
     try {
       const albums = await albumsService.getAllAlbums()
       response.send(albums)
@@ -35,7 +35,7 @@ export class AlbumsController extends BaseController{
     }
   }
 
-  async getOneAlbum(request, response, next){
+  async getOneAlbum(request, response, next) {
     try {
       const albumId = request.params.albumId
       const album = await albumsService.getOneAlbum(albumId)
@@ -45,7 +45,7 @@ export class AlbumsController extends BaseController{
     }
   }
 
-  async archiveAlbum(request, response, next){
+  async archiveAlbum(request, response, next) {
     try {
       const albumId = request.params.albumId
       const userId = request.userInfo.id

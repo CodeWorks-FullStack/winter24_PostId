@@ -5,11 +5,10 @@
       <!-- {{ albums }} -->
       <div v-for="album in albums" :key="album.id" class="col-6 col-md-3">
         <!-- {{ album.title }} -->
-        <AlbumCard :album="album" :x="5" :y="7"/>
+        <AlbumCard :album="album" :x="5" :y="7" />
       </div>
     </section>
   </div>
-
 </template>
 
 <script>
@@ -21,10 +20,10 @@ import AlbumCard from '../components/AlbumCard.vue'
 
 export default {
   setup() {
-    onMounted(()=>{
+    onMounted(() => {
       getAlbums()
     })
-    async function getAlbums(){
+    async function getAlbums() {
       try {
         await albumsService.getAlbums()
       } catch (error) {
@@ -32,10 +31,10 @@ export default {
       }
     }
     return {
-      albums: computed(()=> AppState.albums)
+      albums: computed(() => AppState.albums)
     }
   },
-  components: {AlbumCard}
+  components: { AlbumCard }
 }
 </script>
 

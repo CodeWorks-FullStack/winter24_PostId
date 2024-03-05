@@ -10,10 +10,17 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#albumModal">
-          <i class="mdi mdi-plus-box-outline me-1"></i>Create Album
-        </button>
+      <ul class="navbar-nav me-auto gap-3">
+        <li>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#albumModal">
+            <i class="mdi mdi-plus-box-outline me-1"></i>Create Album
+          </button>
+        </li>
+        <li v-if="route.name == 'Album Details'">
+          <button @click="archiveAlbum()" class="btn btn-success" type="button">
+            <i class="mdi mdi-close-circle me-1"></i>Archive Album
+          </button>
+        </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <div>
@@ -30,21 +37,40 @@
 import { onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { useRoute } from 'vue-router';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import { albumsService } from '../services/AlbumsService.js';
+import { AppState } from '../AppState.js';
 export default {
   setup() {
+    const route = useRoute()
 
     const theme = ref(loadState('theme') || 'light')
 
     onMounted(() => {
       document.documentElement.setAttribute('data-bs-theme', theme.value)
+      logger.log(route)
     })
 
     return {
+      route,
       theme,
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)
         saveState('theme', theme.value)
+      },
+
+      async archiveAlbum() {
+        try {
+          const album = AppState.activeAlbum
+          const wantsToArchive = await Pop.confirm(`Are you sure you want to archive ${album.title}?`)
+          if (!wantsToArchive) { return }
+          await albumsService.archiveAlbum(album.id)
+        } catch (error) {
+          Pop.error(error)
+        }
       }
     }
   },

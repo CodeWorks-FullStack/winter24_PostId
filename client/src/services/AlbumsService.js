@@ -6,6 +6,7 @@ import { api } from "./AxiosService.js"
 
 
 class AlbumsService {
+
   async getAlbums() {
     const response = await api.get('api/albums')
     logger.log('GETTING ALBUMS', response.data)
@@ -25,6 +26,12 @@ class AlbumsService {
     const newAlbum = new Album(response.data)
     AppState.albums.push(newAlbum)
     return newAlbum
+  }
+
+  async archiveAlbum(albumId) {
+
+    const response = await api.delete(`api/albums/${albumId}`)
+    logger.log('ARCHIVED ALBUM', response.data)
   }
 
 }

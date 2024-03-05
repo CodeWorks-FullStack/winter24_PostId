@@ -11,12 +11,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto gap-3">
-        <li>
+        <li v-if="account.id">
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#albumModal">
             <i class="mdi mdi-plus-box-outline me-1"></i>Create Album
           </button>
         </li>
-        <li v-if="route.name == 'Album Details'">
+        <li v-if="route.name == 'Album Details' && activeAlbum && activeAlbum.creatorId == account.id">
           <button @click="archiveAlbum()" class="btn btn-success" type="button">
             <i class="mdi mdi-close-circle me-1"></i>Archive Album
           </button>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import { useRoute } from 'vue-router';
@@ -56,6 +56,9 @@ export default {
     return {
       route,
       theme,
+      activeAlbum: computed(() => AppState.activeAlbum),
+      account: computed(() => AppState.account),
+
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)

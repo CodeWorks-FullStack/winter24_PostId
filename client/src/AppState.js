@@ -5,6 +5,7 @@ import { Album } from './models/Album.js'
 export const AppState = reactive({
   user: {},
   /** @type {import('./models/Account.js').Account} */
+  // @ts-ignore
   account: {},
 
   /** @type {Album[]} */

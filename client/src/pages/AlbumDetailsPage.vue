@@ -1,15 +1,26 @@
 <template>
-  <h1 v-if="album" :class="{ 'text-danger': album.archived }">
-    <!-- THIS IS THE ALBUM DETAILS PAGE -->
-    {{ album.title }}
-  </h1>
-  <h1 v-else class="text-center"> <i class="mdi mdi-loading mdi-spin"></i></h1>
+  <div class="container">
+    <section v-if="album" class="row">
+      <div class="col-12">
+        <h1 :class="{ 'text-danger': album.archived }">
+          {{ album.title }}
+        </h1>
+        <h2>By {{ album.creator.name }}</h2>
+
+      </div>
+    </section>
+    <section v-else class="row">
+      <div class="col-12">
+        <h1 class="text-center"> <i class="mdi mdi-loading mdi-spin"></i></h1>
+      </div>
+    </section>
+  </div>
 </template>
 
 
 <script>
 import { AppState } from '../AppState';
-import { computed, ref, onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router'
 import Pop from '../utils/Pop.js'
 import { albumsService } from '../services/AlbumsService.js'

@@ -30,8 +30,8 @@ export default {
       async createPicture() {
         try {
           const pictureData = editablePictureData.value
-          const albumId = route.params.albumId
-          pictureData.albumId = albumId.toString()
+          const albumId = route.params.albumId // pull id out of route parameters
+          pictureData.albumId = albumId.toString() // add id to ref object
           await picturesService.createPicture(pictureData)
 
           editablePictureData.value = { imgUrl: '', albumId: '' } // clear form

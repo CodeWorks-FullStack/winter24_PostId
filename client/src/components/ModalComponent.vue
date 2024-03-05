@@ -16,10 +16,13 @@
 
 
 <script>
+import AlbumForm from './AlbumForm.vue';
+
 export default {
   setup() {
     return {}
-  }
+  },
+  components: { AlbumForm }
 }
 </script>
 

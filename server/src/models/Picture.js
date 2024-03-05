@@ -11,3 +11,4 @@ export const PictureSchema = new Schema(
     toJSON: { virtuals: true }
   }
 )
+

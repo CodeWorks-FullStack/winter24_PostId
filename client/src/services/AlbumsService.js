@@ -3,8 +3,6 @@ import { Album } from "../models/Album.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
-
-
 class AlbumsService {
 
   async getAlbums() {

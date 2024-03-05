@@ -17,6 +17,7 @@ module.exports = {
     'no-debugger': 'warn',
     'space-before-function-paren': [1, 'never'],
     'vue/html-self-closing': 0,
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'vue/valid-model-definition': 'off'
   }
 }

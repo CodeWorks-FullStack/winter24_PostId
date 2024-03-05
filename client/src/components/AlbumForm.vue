@@ -32,7 +32,7 @@ import { ref } from 'vue'
 import { albumsService } from '../services/AlbumsService.js'
 export default {
   setup() {
-    const editableAlbumData = ref({})
+    const editableAlbumData = ref({ title: '', coverImg: '', category: 'misc' })
 
     return {
       editableAlbumData,
@@ -41,7 +41,7 @@ export default {
       async createAlbum() {
         try {
           await albumsService.createAlbum(editableAlbumData.value)
-          editableAlbumData.value = {}
+          editableAlbumData.value = { title: '', coverImg: '', category: 'misc' }
         } catch (error) {
           Pop.error(error)
         }

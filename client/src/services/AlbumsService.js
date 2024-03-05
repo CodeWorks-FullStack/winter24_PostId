@@ -5,18 +5,24 @@ import { api } from "./AxiosService.js"
 
 
 
-class AlbumsService{
+class AlbumsService {
   async getAlbums() {
     const response = await api.get('api/albums')
     logger.log('GETTING ALBUMS', response.data)
     AppState.albums = response.data.map(album => new Album(album))
   }
 
-  async getAlbumById(albumId){
+  async getAlbumById(albumId) {
     AppState.activeAlbum = null
     const response = await api.get(`api/albums/${albumId}`)
     logger.log('Get AlbumById', response.data)
     AppState.activeAlbum = new Album(response.data)
+  }
+
+  async createAlbum(albumData) {
+    const response = await api.post('api/albums', albumData)
+    logger.log('CREATED ALBUM', response.data)
+    AppState.albums.push(new Album(response.data))
   }
 
 }

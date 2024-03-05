@@ -32,6 +32,8 @@ class AlbumsService {
 
     const response = await api.delete(`api/albums/${albumId}`)
     logger.log('ARCHIVED ALBUM', response.data)
+
+    AppState.activeAlbum.archived = true
   }
 
 }

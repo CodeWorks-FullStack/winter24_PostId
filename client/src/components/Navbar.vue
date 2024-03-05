@@ -17,7 +17,7 @@
           </button>
         </li>
         <li v-if="route.name == 'Album Details' && activeAlbum && activeAlbum.creatorId == account.id">
-          <button @click="archiveAlbum()" class="btn btn-success" type="button">
+          <button @click="archiveAlbum()" class="btn btn-success" type="button" :disabled="activeAlbum.archived">
             <i class="mdi mdi-close-circle me-1"></i>Archive Album
           </button>
         </li>

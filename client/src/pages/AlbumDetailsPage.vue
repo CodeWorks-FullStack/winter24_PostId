@@ -12,7 +12,7 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router'
 import Pop from '../utils/Pop.js'
-import { albumsService } from '../services/albumsService.js'
+import { albumsService } from '../services/AlbumsService.js'
 export default {
   setup() {
     const route = useRoute()

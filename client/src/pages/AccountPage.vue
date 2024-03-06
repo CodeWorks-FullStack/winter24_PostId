@@ -1,8 +1,9 @@
 <template>
   <div class="container">
     <section class="row">
-      <div v-for="collab in collaborators" :key="collab.id" class="col-md-3">
+      <div v-for="collab in collaborators" :key="collab.id" class="col-md-3 mb-3">
         <AlbumCard :album="collab.album" />
+        <button @click="destroyCollaboration(collab.id)" class="btn btn-danger">Delete Collab</button>
       </div>
     </section>
   </div>
@@ -29,7 +30,19 @@ export default {
     }
     return {
       account: computed(() => AppState.account),
-      collaborators: computed(() => AppState.albumCollaborators)
+      collaborators: computed(() => AppState.albumCollaborators),
+
+      async destroyCollaboration(collaborationId) {
+        try {
+          const yes = await Pop.confirm()
+
+          if (!yes) return
+
+          await collaboratorsService.destroyCollaboration(collaborationId)
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
     }
   },
   components: { AlbumCard }

@@ -1,10 +1,18 @@
-import App from "../App.vue"
 import { AppState } from "../AppState.js"
 import { Collaborator } from "../models/Collaborator.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class CollaboratorsService {
+  async destroyCollaboration(collaborationId) {
+    const response = await api.delete(`api/collaborators/${collaborationId}`)
+    logger.log('DESTROYED COLLAB', response.data)
+
+    const collabIndex = AppState.albumCollaborators.findIndex(collab => collab.id == collaborationId)
+    if (collabIndex == -1) throw new Error("UH OH")
+
+    AppState.albumCollaborators.splice(collabIndex, 1)
+  }
   async getMyAlbumCollaborations() {
     const response = await api.get('account/collaborators')
     logger.log('GOT MY ALBUMS', response.data)

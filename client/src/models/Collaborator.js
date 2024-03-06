@@ -6,7 +6,7 @@ export class Collaborator {
     this.albumId = data.albumId
     this.accountId = data.accountId
     this.profile = data.profile
-    this.album = new Album(data.album)
+    this.album = data.album ? new Album(data.album) : null
   }
 }
 

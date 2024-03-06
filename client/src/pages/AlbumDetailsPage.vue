@@ -17,7 +17,7 @@
 
             <div class="mt-2">
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pictureModal"
-                :disabled="!isCollab">
+                :disabled="!isCollab || album.archived">
                 <i class="mdi mdi-plus-box"></i>
                 Add Picture
               </button>
@@ -28,7 +28,7 @@
             <div>
               {{ collaborators.length }} Collaborators
             </div>
-            <button @click="createCollaborator()" class="btn btn-info" :disabled="isCollab">
+            <button @click="createCollaborator()" class="btn btn-info" :disabled="isCollab || album.archived">
               Add Collab
             </button>
             <div v-if="isCollab">You are a collaborator!</div>

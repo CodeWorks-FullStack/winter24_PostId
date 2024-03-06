@@ -6,9 +6,9 @@ export class CollaboratorsController extends BaseController {
   constructor () {
     super('api/collaborators')
     this.router
-
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createCollaborator)
+      .delete('/:collaboratorId', this.destroyCollaborator)
   }
 
   async createCollaborator(request, response, next) {
@@ -17,6 +17,16 @@ export class CollaboratorsController extends BaseController {
       collaboratorData.accountId = request.userInfo.id
       const collaborator = await collaboratorsService.createCollaborator(collaboratorData)
       response.send(collaborator)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async destroyCollaborator(request, response, next) {
+    try {
+      const collaboratorId = request.params.collaboratorId
+      const message = await collaboratorsService.destroyCollaborator(collaboratorId)
+      response.send(message)
     } catch (error) {
       next(error)
     }

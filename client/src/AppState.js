@@ -20,6 +20,11 @@ export const AppState = reactive({
   pictures: [],
 
   /** @type {Collaborator[]}*/
-  profileCollaborators: []
+  profileCollaborators: [],
+
+  /** @type {Collaborator[]}*/
+  albumCollaborators: [],
+
+
 })
 

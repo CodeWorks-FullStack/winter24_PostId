@@ -27,7 +27,10 @@
             <div>
               {{ collaborators.length }} Collaborators
             </div>
-            <button @click="createCollaborator()" class="btn btn-info">Add Collab</button>
+            <button @click="createCollaborator()" class="btn btn-info" :disabled="isCollab">
+              Add Collab
+            </button>
+            <div v-if="isCollab">You are a collaborator!</div>
           </div>
           <div class="col-12 d-flex flex-wrap">
             <img v-for="collab in collaborators" :key="collab.id" :src="collab.profile.picture"
@@ -95,6 +98,7 @@ export default {
       album: computed(() => AppState.activeAlbum),
       pictures: computed(() => AppState.pictures),
       collaborators: computed(() => AppState.profileCollaborators),
+      isCollab: computed(() => AppState.profileCollaborators.some(collab => collab.accountId == AppState.account.id)),
 
       async createCollaborator() {
         try {

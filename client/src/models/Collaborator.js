@@ -1,10 +1,12 @@
+import { Album } from "./Album.js"
+
 export class Collaborator {
   constructor (data) {
     this.id = data.id // NOTE id of the many-to-many
     this.albumId = data.albumId
     this.accountId = data.accountId
     this.profile = data.profile
-    this.album = data.album
+    this.album = new Album(data.album)
   }
 }
 

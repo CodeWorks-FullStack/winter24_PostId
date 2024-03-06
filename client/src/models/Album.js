@@ -1,8 +1,8 @@
 import { Account } from "./Account.js"
 
 
-export class Album{
-  constructor(data){
+export class Album {
+  constructor (data) {
     this.id = data.id
     this.title = data.title
     this.coverImg = data.coverImg
@@ -12,5 +12,6 @@ export class Album{
     this.creator = new Account(data.creator)
     this.createdAt = new Date(data.createdAt)
     this.updatedAt = new Date(data.updatedAt)
+    this.memberCount = data.memberCount || 0
   }
 }

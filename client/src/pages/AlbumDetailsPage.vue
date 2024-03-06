@@ -16,7 +16,8 @@
             </div>
 
             <div class="mt-2">
-              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pictureModal">
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#pictureModal"
+                :disabled="!isCollab">
                 <i class="mdi mdi-plus-box"></i>
                 Add Picture
               </button>

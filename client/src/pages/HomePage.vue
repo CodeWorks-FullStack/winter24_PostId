@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between">
+        <button v-for="category in categories" :key="category" @click="changeFilterTerm(category)">
+          {{ category }}
+        </button>
+
+      </div>
+    </div>
     <section class="row my-2 g-4">
       <!-- THE ALBUMS WILL GO HERE -->
       <!-- {{ albums }} -->
@@ -12,7 +20,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { albumsService } from '../services/AlbumsService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
@@ -20,6 +28,8 @@ import AlbumCard from '../components/AlbumCard.vue'
 
 export default {
   setup() {
+    const filterTerm = ref('all')
+
     onMounted(() => {
       getAlbums()
     })
@@ -31,7 +41,19 @@ export default {
       }
     }
     return {
-      albums: computed(() => AppState.albums)
+      filterTerm,
+      changeFilterTerm(term) {
+        filterTerm.value = term
+      },
+      categories: ['all', 'cats', 'dogs', 'games', 'aesthetics', 'misc', 'gachamon', 'animals'],
+      albums: computed(() => {
+        if (filterTerm.value == 'all') {
+          return AppState.albums
+        }
+        else {
+          return AppState.albums.filter(album => album.category == filterTerm.value)
+        }
+      })
     }
   },
   components: { AlbumCard }

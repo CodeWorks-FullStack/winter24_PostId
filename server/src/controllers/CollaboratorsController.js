@@ -6,6 +6,7 @@ export class CollaboratorsController extends BaseController {
   constructor () {
     super('api/collaborators')
     this.router
+
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createCollaborator)
   }

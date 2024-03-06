@@ -10,3 +10,10 @@ export const CollaboratorSchema = new Schema(
     toJSON: { virtuals: true }
   }
 )
+
+CollaboratorSchema.virtual('profile', {
+  localField: 'accountId',
+  foreignField: '_id',
+  ref: 'Account',
+  justOne: true
+})

@@ -56,6 +56,10 @@
       "titleBar.inactiveBackground": "#21979299",
       "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#219792"
+    "peacock.color": "#219792",
+    "cSpell.words": [
+      "collab",
+      "Collabs"
+    ]
   }
 }

@@ -4,6 +4,11 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 class CollaboratorsService {
+  async createCollaborator(albumData) {
+    const response = await api.post('api/collaborators', albumData)
+    logger.log('CREATED COLLAB', response.data)
+    AppState.profileCollaborators.push(new Collaborator(response.data))
+  }
   async getCollaboratorsByAlbumId(albumId) {
     const response = await api.get(`api/albums/${albumId}/collaborators`)
     logger.log('GOT COLLABS', response.data)

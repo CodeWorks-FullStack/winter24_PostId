@@ -22,6 +22,17 @@
               </button>
             </div>
           </div>
+
+          <div class="col-12 d-flex my-3 gap-2 align-items-center">
+            <div>
+              {{ collaborators.length }} Collaborators
+            </div>
+            <button @click="createCollaborator()" class="btn btn-info">Add Collab</button>
+          </div>
+          <div class="col-12 d-flex flex-wrap">
+            <img v-for="collab in collaborators" :key="collab.id" :src="collab.profile.picture"
+              :alt="collab.profile.name" class="w-25 object-fit-cover">
+          </div>
         </section>
       </div>
 
@@ -82,7 +93,17 @@ export default {
     }
     return {
       album: computed(() => AppState.activeAlbum),
-      pictures: computed(() => AppState.pictures)
+      pictures: computed(() => AppState.pictures),
+      collaborators: computed(() => AppState.profileCollaborators),
+
+      async createCollaborator() {
+        try {
+          const albumData = { albumId: route.params.albumId }
+          await collaboratorsService.createCollaborator(albumData)
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
     }
   }
 };

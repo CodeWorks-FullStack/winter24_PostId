@@ -25,7 +25,8 @@ export class CollaboratorsController extends BaseController {
   async destroyCollaborator(request, response, next) {
     try {
       const collaboratorId = request.params.collaboratorId
-      const message = await collaboratorsService.destroyCollaborator(collaboratorId)
+      const userId = request.userInfo.id
+      const message = await collaboratorsService.destroyCollaborator(collaboratorId, userId)
       response.send(message)
     } catch (error) {
       next(error)

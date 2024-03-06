@@ -1,5 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
-import { BadRequest } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class CollaboratorsService {
 
@@ -7,7 +7,13 @@ class CollaboratorsService {
     // { userId: 'dadwopjqkn32139123-ic' }
     // const albumCollabs = await dbContext.Collaborators.find({ userId })
 
-    const albumCollabs = await dbContext.Collaborators.find({ accountId: userId }).populate('album')
+    const albumCollabs = await dbContext.Collaborators.find({ accountId: userId })
+      .populate({
+        path: 'album',
+        populate: {
+          path: 'memberCount'
+        }
+      })
     return albumCollabs
   }
   async getCollaboratorsForAlbum(albumId) {
@@ -19,10 +25,12 @@ class CollaboratorsService {
     return collaborator
   }
 
-  async destroyCollaborator(collaboratorId) {
+  async destroyCollaborator(collaboratorId, userId) {
     const collaboratorToDestroy = await dbContext.Collaborators.findById(collaboratorId)
 
     if (!collaboratorToDestroy) { throw new BadRequest(`Invalid id: ${collaboratorId}`) }
+
+    if (collaboratorToDestroy.accountId != userId) { throw new Forbidden('YOU CANNOT DO THAT') }
 
     await collaboratorToDestroy.deleteOne()
 

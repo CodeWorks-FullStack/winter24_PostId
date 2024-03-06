@@ -9,7 +9,7 @@ class AlbumsService {
     return album
   }
   async getAllAlbums() {
-    const albums = await dbContext.Albums.find().populate('creator')
+    const albums = await dbContext.Albums.find().populate('creator').populate('memberCount')
     return albums
   }
 
